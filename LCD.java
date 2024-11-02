@@ -11,20 +11,6 @@ public class LCD {
         newFrac(calculate(lcm1, 2));
     }
 
-    // calculates the greatest common divisor/factor of two numbers
-    public static int gcd(int num1, int num2, int ans) {
-        if (num1 % ans == 0 && num2 % ans == 0) {
-            return ans;
-        } else {
-            return gcd(num1, num2, ans - 1);
-        }
-    } // end of gcd method
-
-    // calculates the least common multiple of two numbers
-    public static int lcm(int num1, int num2) {
-        return (num1 * num2) / gcd(num1, num2, num2);
-    } // end of lcm method
-
     // introduces user to the program
     public static int intro() {
         System.out.println("Welcome to the Least Common Denominator Calculator");
@@ -36,9 +22,9 @@ public class LCD {
 
     // initialzes array to track denominators
     public static void fracArrays(int fracNum) {
-        numers = new int[fracNum];
-        denoms = new int[fracNum];
-        
+        numers = new int[fracNum]; // initialzes numerator array
+        denoms = new int[fracNum]; // initialize denominator array
+        //add values to each array
         for (int  i = 0; i < fracNum; i++) {
             int counter = i + 1;
             System.out.println("Please enter Numerator " + counter + ": ");
@@ -49,20 +35,40 @@ public class LCD {
             input.nextLine();
         }
     } // end of fracArrays method
+    
+    // calculates the greatest common divisor/factor of two numbers
+    public static int gcd(int num1, int num2, int ans) {
+        if (num1 % ans == 0 && num2 % ans == 0) { // if both numbers are fully divisible by ans
+            return ans; // ans is returned as the greatest common divisor/factor
+        } else {
+            return gcd(num1, num2, ans - 1); //reduces the possible answer by 1 each step
+        }
+    } // end of gcd method
+
+    // calculates the least common multiple of two numbers
+    public static int lcm(int num1, int num2) {
+        // formula to find least common multiple is a * b / gcd(a,b)
+        return (num1 * num2) / gcd(num1, num2, num2);  
+    } // end of lcm method
 
     // calculates the final answer out of all denominators
     public static int calculate(int ans, int index) {
-        if (index == denoms.length - 1) {
+        /*if we are at the last index of the denoms array the final answer is 
+         the lcm of the previously calcualted lcm and the last denominator*/
+        if (index == denoms.length - 1) { 
             return lcm(lcm(denoms[index - 2], denoms[index - 1]), denoms[index]);
-        } else if (denoms.length == 2) {
+        } else if (denoms.length == 2) { // if there are only two fractions the ans is the answer
             return ans;
-        }else {
+        }else { 
+            /*to calculate the lcm of more than 2 values you must use the least common multiple of
+             two other values EX. 3 values {a, b, c} The lcm = lcm(lcm(a,b), c)*/
             return lcm(lcm(denoms[index - 1], denoms[index]), denoms[index + 1]);
         }
     } // end of calculate
 
     // prints out original and new fractions
     public static void newFrac(int ans) {
+        //prints out the original fractions
         System.out.print("Original Fractions: [");
         for (int i = 0; i < numers.length; i ++) {
             System.out.print(numers[i] + " / " + denoms[i]);
@@ -71,10 +77,12 @@ public class LCD {
             }
         }
         System.out.println("]");
+        //prints out the new fractions
         System.out.print("New Fractions: [");
         for (int i = 0; i < numers.length; i ++) {
-            int mult = ans / denoms[i];
-            System.out.print((numers[i] * mult)  + " / " + ans);
+            // calculates the factor by which you multiply the old denominator to get the new denominator
+            int mult = ans / denoms[i]; 
+            System.out.print((numers[i] * mult)  + " / " + ans); 
             if (i < numers.length - 1) {
                 System.out.print(", ");
             }
