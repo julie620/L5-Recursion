@@ -52,15 +52,17 @@ public class LCD {
 
     // calculates the final answer out of all denominators
     public static int calculate(int index) {
-        /*if we are at the last index of the denoms array the final answer is 
-         the lcm of the previously calcualted lcm and the last denominator*/
-        if (index == denoms.length - 1) { 
-            return lcm(lcm(denoms[index - 2], denoms[index - 1]), denoms[index]);
-        } else if (denoms.length == 2) { // if there are only two fractions lcm runs once
+        if (denoms.length == 2) { // if there are only two fractions lcm runs once
             return lcm(denoms[0], denoms[1]);
-        }else { 
-            /*to calculate the lcm of more than 2 values you must use the least common multiple of
-             two other values EX. 3 values {a, b, c} The lcm = lcm(lcm(a,b), c)*/
+        }
+        /*if we are at the last index of the denoms array the final answer is 
+        the lcm of the previously calcualted lcm and the last denominator*/
+        else if (index == denoms.length - 1) { 
+            return lcm(lcm(denoms[index - 2], denoms[index - 1]), denoms[index]);
+        } 
+        /*to calculate the lcm of more than 2 values you can use the least common multiple of
+        two other values EX. 3 values {a, b, c} The lcm = lcm(lcm(a,b), c)*/
+        else { 
             return lcm(lcm(denoms[index - 1], denoms[index]), denoms[index + 1]);
         }
     } // end of calculate
