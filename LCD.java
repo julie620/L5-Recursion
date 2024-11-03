@@ -7,8 +7,7 @@ public class LCD {
 
     public static void main (String[] args) {
         fracArrays(intro());
-        int lcm1 = lcm(denoms[0], denoms[1]);
-        newFrac(calculate(lcm1, 2));
+        newFrac(calculate(2));
     }
 
     // introduces user to the program
@@ -35,7 +34,7 @@ public class LCD {
             input.nextLine();
         }
     } // end of fracArrays method
-    
+
     // calculates the greatest common divisor/factor of two numbers
     public static int gcd(int num1, int num2, int ans) {
         if (num1 % ans == 0 && num2 % ans == 0) { // if both numbers are fully divisible by ans
@@ -52,13 +51,13 @@ public class LCD {
     } // end of lcm method
 
     // calculates the final answer out of all denominators
-    public static int calculate(int ans, int index) {
+    public static int calculate(int index) {
         /*if we are at the last index of the denoms array the final answer is 
          the lcm of the previously calcualted lcm and the last denominator*/
         if (index == denoms.length - 1) { 
             return lcm(lcm(denoms[index - 2], denoms[index - 1]), denoms[index]);
-        } else if (denoms.length == 2) { // if there are only two fractions the ans is the answer
-            return ans;
+        } else if (denoms.length == 2) { // if there are only two fractions lcm runs once
+            return lcm(denoms[0], denoms[1]);
         }else { 
             /*to calculate the lcm of more than 2 values you must use the least common multiple of
              two other values EX. 3 values {a, b, c} The lcm = lcm(lcm(a,b), c)*/
