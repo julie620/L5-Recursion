@@ -1,3 +1,8 @@
+//Name: Juliana Serrano
+//Date: 11/08/2024
+//Lab 5: Recursion Lab - Least Common Denominator
+//Purpose: Takes two or more fractions and returns new fractions with least common denominator
+
 import java.util.Scanner;
 
 public class LCD {
@@ -7,15 +12,24 @@ public class LCD {
 
     public static void main (String[] args) {
         fracArrays(intro());
-        newFrac(calculate(2));
+        newFrac(calculate(denoms.length - 1));
     }
 
     // introduces user to the program
     public static int intro() {
         System.out.println("Welcome to the Least Common Denominator Calculator");
-        System.out.println("How many fractions would you like to enter?");
-        int fracNum = input.nextInt();
-        input.nextLine();
+        Boolean invalidNum = true;
+        int fracNum = 0;
+        while(invalidNum) {
+            System.out.println("How many fractions would you like to enter?");
+            fracNum = input.nextInt();
+            input.nextLine();
+            if (fracNum > 1) {
+                invalidNum = false;
+            } else {
+                System.out.println("Please enter a numebr greater than 1");
+            }
+        }
         return fracNum;
     } // end of intro method
 
@@ -32,7 +46,7 @@ public class LCD {
             System.out.println("Please enter Denominator " + counter + ": ");
             denoms[i] = input.nextInt();
             input.nextLine();
-        }
+        } // end of for loop
     } // end of fracArrays method
 
     // calculates the greatest common divisor/factor of two numbers
@@ -41,7 +55,7 @@ public class LCD {
             return ans; // ans is returned as the greatest common divisor/factor
         } else {
             return gcd(num1, num2, ans - 1); //reduces the possible answer by 1 each step
-        }
+        } // end of if else statement
     } // end of gcd method
 
     // calculates the least common multiple of two numbers
@@ -52,19 +66,12 @@ public class LCD {
 
     // calculates the final answer out of all denominators
     public static int calculate(int index) {
-        if (denoms.length == 2) { // if there are only two fractions lcm runs once
-            return lcm(denoms[0], denoms[1]);
-        }
-        /*if we are at the last index of the denoms array the final answer is 
-        the lcm of the previously calcualted lcm and the last denominator*/
-        else if (index == denoms.length - 1) { 
-            return lcm(lcm(denoms[index - 2], denoms[index - 1]), denoms[index]);
-        } 
-        /*to calculate the lcm of more than 2 values you can use the least common multiple of
-        two other values EX. 3 values {a, b, c} The lcm = lcm(lcm(a,b), c)*/
+        if (index == 1) { 
+            return lcm(denoms[index - 1], denoms[index]);
+        } // end of if statement
         else { 
-            return lcm(lcm(denoms[index - 1], denoms[index]), denoms[index + 1]);
-        }
+            return lcm(calculate(index - 1), denoms[index]);
+        } // end of else statement
     } // end of calculate
 
     // prints out original and new fractions
@@ -74,9 +81,9 @@ public class LCD {
         for (int i = 0; i < numers.length; i ++) {
             System.out.print(numers[i] + " / " + denoms[i]);
             if (i < numers.length - 1) {
-                System.out.print(", ");
-            }
-        }
+                System.out.print(", "); // prints out comma after each fraction except the last
+            } // end of if statement
+        } // end of for statement
         System.out.println("]");
         //prints out the new fractions
         System.out.print("New Fractions: [");
@@ -84,10 +91,10 @@ public class LCD {
             // calculates the factor by which you multiply the old denominator to get the new denominator
             int mult = ans / denoms[i]; 
             System.out.print((numers[i] * mult)  + " / " + ans); 
-            if (i < numers.length - 1) {
+            if (i < numers.length - 1) { // prints out comma after each fraction except the last 
                 System.out.print(", ");
-            }
-        }
+            } // end of if statement
+        } // end of for statement
         System.out.println("]");
     } // end of newFrac method
 }
