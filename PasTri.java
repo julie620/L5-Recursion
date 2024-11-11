@@ -34,10 +34,17 @@ public class PasTri {
         } // end of else statement
     } //end of calcRow method
 
+    public static void space(int n) {
+        for (int i = 0; i < n; i ++) {
+            System.out.print(" ");
+        }
+    }
+
     // prints out traingle
     public static void triangle(int totalRows, int row) {
         if (row == 0) { // prints first row
-           System.out.println();
+            System.out.println();
+            space(totalRows);
             System.out.println(1);
             triangle(totalRows, row + 1);
         } // end of if statement
@@ -46,6 +53,7 @@ public class PasTri {
             System.out.println();
         } // end of else if statement
         else {
+            space(totalRows - row);
             calcRow(row, 1, 1);
             System.out.println();
             triangle(totalRows, row + 1);
