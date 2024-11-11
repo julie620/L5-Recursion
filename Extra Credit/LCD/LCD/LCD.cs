@@ -5,7 +5,7 @@
 
 using System;
 
-namespace Practice
+namespace LCD
 {
     class LCD1 {
         public static int[] numers;
