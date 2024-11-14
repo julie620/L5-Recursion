@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LCD")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd231434ed2f4f4ad66bd5d9100db83bb13d37c1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f3a62d279b6558c6fdc5b5896bccdbefb5ac858")]
 [assembly: System.Reflection.AssemblyProductAttribute("LCD")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LCD")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
